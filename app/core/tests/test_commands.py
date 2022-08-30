@@ -1,5 +1,5 @@
 """
-Test custom Django managment commands.
+Test custom Django management commands.
 """
 from unittest.mock import patch
 
@@ -11,7 +11,7 @@ from django.test import SimpleTestCase
 
 
 @patch('core.management.commands.wait_for_db.Command.check')
-class commandTests(SimpleTestCase):
+class CommandTests(SimpleTestCase):
     """Test commands."""
 
     def test_wait_for_db_ready(self, patched_check):
@@ -30,5 +30,5 @@ class commandTests(SimpleTestCase):
 
         call_command('wait_for_db')
 
-        self.assertEqual(patched_check.call_conut, 6)
+        self.assertEqual(patched_check.call_count, 6)
         patched_check.assert_called_with(databases=['default'])
