@@ -1,7 +1,7 @@
 """
 Database models.
 """
-from pyexpat import model
+from pyexpat import model # noqa
 # from turtle import Turtle
 from django.db import models
 from django.contrib.auth.models import (
@@ -24,7 +24,6 @@ class UserManager(BaseUserManager):
 
         return user
 
-
     def create_superuser(self, email, password):
         """Create and return a new superuser."""
         user = self.create_user(email, password)
@@ -33,6 +32,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     """User in the system."""
