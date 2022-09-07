@@ -1,7 +1,6 @@
 """
 Serializers for the user API Views.
 """
-from tkinter.ttk import Style
 from django.contrib.auth import (
     get_user_model,
     authenticate,
