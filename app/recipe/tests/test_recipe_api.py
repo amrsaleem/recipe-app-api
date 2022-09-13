@@ -97,7 +97,7 @@ class PrivateRecipeAPITests(TestCase):
         url = detail_url(recipe.id)
         res = self.client.get(url)
 
-        serializer = RecipeSerializer(recipe)
+        serializer = RecipeDetailSerializer(recipe)
         self.assertEqual(res.data, serializer.data)
 
     def test_create_recipe(self):
@@ -121,16 +121,15 @@ class PrivateRecipeAPITests(TestCase):
             user=self.user,
             title='Sample recipe title',
             link=original_link,
-            description='Sample Desc.',
         )
 
-        payload = {'description': 'New recipe title/Desc.'}
+        payload = {'title': 'New recipe title'}
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         recipe.refresh_from_db()
-        self.assertEqual(recipe.title, payload['description'])
+        self.assertEqual(recipe.title, payload['title'])
         self.assertEqual(recipe.link, original_link)
         self.assertEqual(recipe.user, self.user)
 
@@ -141,14 +140,13 @@ class PrivateRecipeAPITests(TestCase):
             title='Sample recipe title',
             link='https://example.com/recipe.pdf',
             description='Sample recipe description.',
-            price=Decimal('5.50')
         )
 
         payload = {
             'title': 'New recipe title',
             'link': 'https://example.com/new-recipe.pdf',
             'description': 'New recipe description.',
-            'time_minutes': '10',
+            'time_minutes': 10,
             'price': Decimal('2.50'),
         }
         url = detail_url(recipe.id)
