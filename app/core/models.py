@@ -1,7 +1,7 @@
 """
 Database models.
 """
-from unittest.util import _MAX_LENGTH
+from unittest.util import _MAX_LENGTH # noqa
 from django.conf import settings
 from pyexpat import model # noqa
 # from turtle import Turtle
